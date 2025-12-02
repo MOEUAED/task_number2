@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="">question</label>
+        <input type="text"  id="qs">
+        <br>
+        <label for="">reponse</label>
+        <input type="text" id="rpns">
+        <br>
+        <button id="add" onclick="add_flash_card()" >add flashcards</button>
+
+        <div id="list"></div>
+    </div>
+
+    <script>
+
+        function add_flash_card() {
+            let q = document.getElementById("qs").value;
+            let a = document.getElementById("rpns").value;
+
+            let saved = JSON.parse(localStorage.getItem("flash-card"));
+
+            let card = { question: q, answer: a };
+
+            saved.push(card);
+
+            localStorage.setItem("flash-card", JSON.stringify(saved));
+
+            show_cards();
+        }
+
+    
+
+        function show_card (){
+            let saved = JSON.parse(localStorage.getItem("flash-card"));
+            let list = document.getElementById("list");
+            list.innerHTML=``;
+
+
+            list.forEach(card => {
+                list.innerHTML=`
+                    <p>QUESTION : ${q}</p>
+                    <p>Answer : ${a}</p>
+                `;
+            });
+
+        }
+
+        show_card();
+
+    </script>
+</body>
+</html>
